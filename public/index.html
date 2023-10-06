@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>The Hell Simulator</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Most realistic hell simulator ever" />
+
+    <style>
+      @font-face {
+        font-family: "Pixellari";
+        src: url("static/fonts/pixellari.ttf") format("truetype");
+      }
+
+      @font-face {
+        font-family: "Alkhemikal";
+        src: url("static/fonts/alkhemikal.ttf") format("truetype");
+      }
+
+      body {
+        /* background: #16000a; */
+        background-image: url(static/bg/bgv3.png);
+        /* background-size: cover; */
+        margin: 0;
+        padding: 0;
+        color: #ddd;
+        font-family: "Pixellari";
+        font-size: 0.9rem;
+      }
+
+      h1,
+      h2 {
+        font-family: Alkhemikal;
+        margin: 0;
+        padding: 0;
+      }
+
+      b {
+        font-weight: normal;
+      }
+      em {
+        font-style: normal;
+      }
+
+      .main {
+        padding: 6px;
+        display: grid;
+        grid-template-columns: 5fr 3fr 2fr;
+      }
+
+      #game {
+        padding: 6px;
+        margin: 2px 12px;
+        border: 1px solid #6a4141;
+        background: #290c16;
+        /* max-width: 640px; */
+      }
+
+      #topbar {
+        padding: 9px;
+        background-color: #381723;
+
+        .score {
+          display: inline-block;
+          margin-right: 6px;
+
+        .icon {
+            color: #ffff00;
+          }
+        }
+      }
+
+      .container {
+        > h2 {
+          padding: 6px 6px 6px 12px;
+        }
+        .body {
+          /* border: 1px solid #732026; */
+          display: grid;
+          grid-template-columns: repeat(auto-fill, minmax(152px, 1fr));
+          grid-gap: 12px;
+        }
+        .box {
+          border: 1px solid #6a4141;
+          padding: 4px;
+          display: grid;
+          grid-template-columns: 4fr 6fr;
+        }
+        .icon img {
+          image-rendering: pixelated;
+          width: 64px;
+          height: 64px;
+        }
+        .info {
+          .pill {
+            display: block;
+            > em {
+              font-style: normal;
+            }
+          }
+        }
+      }
+
+      #info {
+        padding: 6px;
+        margin: 2px 12px;
+        border: 1px solid #6a4141;
+        background: #290c16;
+
+        > h1 {
+          text-align: center;
+        }
+
+        .image img {
+          image-rendering: pixelated;
+          width: 128px;
+          height: 128px;
+          margin: 0 auto;
+          display: block;
+        }
+        .description {
+          padding: 6px;
+          color: #ccc;
+        }
+        .upgrade {
+          text-align: center;
+          background: #6a4141;
+        }
+      }
+    </style>
+
+    <!-- <link rel="stylesheet" href="css/style.css" /> -->
+  </head>
+
+  <body>
+    <div class="main" id="root">
+      <main id="game">
+        <section id="topbar">
+          <div id="scores">
+            <div class="score">
+              <span class="icon">Scream</span>
+              <span class="value"><b id="score_scream">0</b></span>
+            </div>
+            <div class="score">
+              <span class="icon">Demon</span>
+              <span class="value"><b id="score_demon">0</b></span>
+            </div>
+            <div class="score">
+              <span class="icon">Soul</span>
+              <span class="value"><b id="score_soul">0</b></span>
+            </div>
+            <div class="score">
+              <span class="icon">Lava</span>
+              <span class="value"><b id="score_lava">0</b></span>
+            </div>
+            <div class="score">
+              <span class="icon">Level</span>
+              <span class="value"><b id="score_level">1</b></span>
+            </div>
+          </div>
+        </section>
+
+        <section id="punishments" class="container">
+          <h2>Torture</h2>
+          <div class="body">
+            <!-- this list has to be generated based on the production in main.js-->
+            <div class="punishment box" id="punish_1">
+              <div class="icon">
+                <img src="static/torture_icons/braintumor.png" />
+              </div>
+              <div class="info">
+                <span class="level pill"><em>𖤐</em> <b>0</b></span>
+                <span class="demon pill"><em>😈</em> <b>0</b></span>
+                <span class="soul pill"><em>👻</em> <b>0</b></span>
+                <span class="lava pill"><em>🔥</em> <b>0</b></span>
+                <span class="scream pill"><em>😱</em> <b>0</b></span>
+              </div>
+            </div>
+
+            <div class="punishment box" id="punish_2">
+              <div class="icon">
+                <img src="static/torture_icons/cauldron.png" />
+              </div>
+              <div class="info">
+                <span class="level pill"><em>𖤐</em> <b>0</b></span>
+                <span class="demon pill"><em>😈</em> <b>0</b></span>
+                <span class="soul pill"><em>👻</em> <b>0</b></span>
+                <span class="lava pill"><em>🔥</em> <b>0</b></span>
+                <span class="scream pill"><em>😱</em> <b>0</b></span>
+              </div>
+            </div>
+
+            <div class="punishment box" id="punish_3">
+              <div class="icon">
+                <img src="static/torture_icons/snake.png" />
+              </div>
+              <div class="info">
+                <span class="level pill"><em>𖤐</em> <b>0</b></span>
+                <span class="demon pill"><em>😈</em> <b>0</b></span>
+                <span class="soul pill"><em>👻</em> <b>0</b></span>
+                <span class="lava pill"><em>🔥</em> <b>0</b></span>
+                <span class="scream pill"><em>😱</em> <b>0</b></span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="prod_mining" class="container">
+          <h2>Lava Production</h2>
+          <div class="body">
+            <div class="lava box">
+              <div class="icon">
+                <img src="static/lava_icons/lava1.png" />
+              </div>
+              <div class="info">
+                <span class="level pill"><em>𖤐</em> <b>0</b></span>
+                <span class="demon pill"><em>😈</em> <b>0</b></span>
+                <span class="lava pill"><em>🔥</em> <b>0</b></span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="prod_demon" class="container">
+          <h2>Demon Production</h2>
+          <div class="body">
+            <div class="lava box">
+              <div class="icon">
+                <img src="static/lava_icons/lava1.png" />
+              </div>
+              <div class="info">
+                <span class="level pill"><em>𖤐</em> <b>0</b></span>
+                <span class="scream pill"><em>😱</em> <b>0</b></span>
+                <span class="demon pill"><em>😈</em> <b>0</b></span>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+      <aside id="info">
+        <h1>Brain Popper</h1>
+        <div class="image">
+          <img src="static/torture_icons/braintumor.png" />
+        </div>
+        <div class="details">
+          <div class="demon pill"><em>😈</em> <b>0</b> Demons</div>
+          <div class="soul pill"><em>👻</em> <b>0</b> Souls (Capacity)</div>
+          <div class="lava pill"><em>🔥</em> <b>0</b> lava/sec</div>
+          <div class="scream pill"><em>😱</em> <b>0</b> screams/sec</div>
+        </div>
+
+        <div class="description">
+          Bright red balloons of varying sizes and shapes emerge suddenly from
+          the person's head, as if they were magically inflated within the
+          skull. When the balloons "pop," they burst in a burst of
+        </div>
+
+        <div class="upgrade">
+          <div class="demon pill"><em>😈</em> 123 > 234</div>
+          <div class="soul pill"><em>👻</em> 123 > 534</div>
+          <div class="lava pill"><em>🔥</em> 123 > 233</div>
+          <div class="scream pill"><em>😱</em> 123 > 1023</div>
+
+          <button>Upgrade <em>🔥</em> 123</button>
+        </div>
+      </aside>
+      <aside id="empty">&nbsp;</aside>
+    </div>
+
+    <script type="text/jsx" src="../src/index.js"></script>
+  </body>
+</html>
